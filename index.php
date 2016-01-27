@@ -1,39 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Shopping Cart</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-<body>
+<?php
+	
+	// Include the header
+	include 'templates/header.template.php';
 
-	<h1>Products</h1>
+?>
 
-	<?php
+<h1 class="text-center">Products</h1>
 
-		// Connect to the database
-		$dbc = new mysqli( 'localhost', 'root', '', 'shopping_cart' );
+<?php
 
-		// Get all the products from the database
-		$sql = "SELECT id, name, description, price, stock FROM products";
+	// Connect to the database
+	$dbc = new mysqli( 'localhost', 'root', '', 'shopping_cart' );
 
-		// Run the query
-		$result = $dbc->query( $sql );
+	// Get all the products from the database
+	$sql = "SELECT id, name, description, price, stock FROM products";
 
-		// Loop over the result
-		while ( $row = $result->fetch_assoc() ) {
-			// Present the data
-			echo '<ul>';
-				echo '<li>ID: '.$row['id'].'</li>';
-				echo '<li>Name: '.$row['name'].'</li>';
-				echo '<li>Description: '.$row['description'].'</li>';
-				echo '<li>Price: '.$row['price'].'</li>' ;
-				echo '<li>Stock: '.$row['stock'].'</li>' ;
-			echo '</ul>';
-		}
+	// Run the query
+	$result = $dbc->query( $sql );
 
+	// Loop over the result
+	while ( $row = $result->fetch_assoc() ) {
 
-	?>
+		// Include the product template
+		include 'templates/product.template.php';
+	}
 
-</body>
-</html>
+	// Include the footer
+	include 'templates/footer.template.php';
+?>
+
